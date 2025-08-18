@@ -5,8 +5,8 @@ import dotenv from 'dotenv';
 import jwt,{decode} from 'jsonwebtoken';
 import cors from 'cors';
 
-import userRouter from './routes/UserRouter.js';
-
+import userRouter from './Routes/UserRouter.js';
+import productRouter from './Routes/ProductRouter.js';
 
 
 dotenv.config();
@@ -49,7 +49,7 @@ connection.once('open',()=>{
 
 
 app.use('/api/users',userRouter);
-
+app.use('/api/products',productRouter);
 
 
 app.listen(5000,()=>{

@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../Models/User.js";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
@@ -50,7 +50,7 @@ export function LoginUser(req,res){
 
 
                     res.status(200).json({
-                       message: 'Login successful',token:token,role:user.role
+                       message: 'Login successful',token:token
                     });
                 }else{
                     res.status(400).json('Invalid password');
@@ -86,36 +86,5 @@ export function editUser(req, res) {
         }
     }).catch((err) => {
         return res.status(400).json({ message: 'Error finding user', error: err });
-    });
-}
-
-// delete user
-export function deleteUser(req, res) {
-    // Check if user is logged in
-    if (req.user == null) {
-        return res.status(400).json('You must login to delete your account');
-    }
-
-    const id = req.params.id;
-
-    // Find the user by ID
-    User.findById(id).then((user) => {
-        // Check if the user is trying to delete their own account
-        if (user.email === req.user.email) {
-            // If so, proceed with deletion
-            User.findByIdAndDelete(id).then(() => {
-                return res.status(200).json({ message: 'User Deleted Successfully!' });
-            })
-            .catch((err) => {
-                return res.status(400).json('Error: ' + err);
-            });
-        } else {
-            // If the user is trying to delete someone else's account
-            return res.status(403).json('You are not authorized to delete this account');
-        }
-    })
-    .catch((err) => {
-        // Error when user is not found
-        return res.status(400).json('Error: ' + err);
     });
 }
