@@ -43,11 +43,7 @@ const productSchema = new mongoose.Schema({
   dateAdded: {
     type: Date,
     default: Date.now,
-  },
-
-  images: [
-    String
-  ],
+  }
 });
 
 const Product = mongoose.model('Product', productSchema);
