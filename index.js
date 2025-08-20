@@ -2,10 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import jwt,{decode} from 'jsonwebtoken';
 import cors from 'cors';
-
-import userRouter from './Routes/UserRouter.js';
 import productRouter from './Routes/ProductRouter.js';
 
 
@@ -14,27 +11,6 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-
-  
-
-
-app.use((req, res, next) => {
-    let token = req.headers['authorization']; 
-
-    if (token) {
-        token = token.replace('Bearer ', '');
-        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) {
-                return res.status(403).json({ message: 'Token is invalid' });
-            } else {
-                req.user = decoded;  
-                next();
-            }
-        });
-    } else {
-        next();  
-    }
-});
 
 const mongoUrl =  process.env.MONGO_URL;
 
@@ -48,7 +24,6 @@ connection.once('open',()=>{
 })
 
 
-app.use('/api/users',userRouter);
 app.use('/api/products',productRouter);
 
 
