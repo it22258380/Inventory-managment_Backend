@@ -56,3 +56,46 @@ export function getProductById(req, res) {
         })
         .catch((err) => res.status(500).json({ message: "Cannot fetch product", error: err }));
 }
+
+
+//availability 
+export async function getAvailability(req, res) {
+  try {
+    const categories = ["Groceries", "Personal Care", "Household", "Stationery"];
+    const result = [];
+
+    for (const cat of categories) {
+      const available = await Product.countDocuments({ category: cat, availability: true, quantity: { $gt: 0 } });
+      const outOfStock = await Product.countDocuments({ category: cat, $or: [{ availability: false }, { quantity: 0 }] });
+      result.push({ category: cat, available, outOfStock });
+    }
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching availability", error: err });
+  }
+}
+
+//low stock table
+export async function getLowStock(req, res) {
+  try {
+    const threshold = 5;
+    const lowStockProducts = await Product.find({ quantity: { $lt: threshold } });
+    res.status(200).json(lowStockProducts);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching low stock products", error: err });
+  }
+}
+
+//category graph
+export async function getCategoryGraph(req, res) {
+  try {
+    const distribution = await Product.aggregate([
+      { $group: { _id: "$category", count: { $sum: 1 } } },
+      { $project: { category: "$_id", count: 1, _id: 0 } }
+    ]);
+    res.status(200).json(distribution);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching category distribution", error: err });
+  }
+}
