@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "1d5299c0-67ca-43a8-ad3c-c57c85e7d2e3",
+		"name": "Inventory Managment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32284192"
+	},
+	"item": [
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "add",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBa2FzaCIsImxhc3ROYW1lIjoiamF5YXN1cml5YSIsImVtYWlsIjoiQWthc2hAZ21haWwuY29tIiwicm9sZSI6InJlZ2lzdGVyZWQiLCJpYXQiOjE3NTU1MTQzNTh9.TMj4z7pVzfxi-_WHAAVVT1RZq4H0xebPGTtxC0UZjYA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"Coca Cola 1L\",\r\n    \"category\": \"Groceries\",\r\n    \"price\": 180,\r\n    \"brand\": \"Coca Cola\",\r\n    \"description\": \"Refreshing soft drink, 1 liter bottle.\",\r\n    \"availability\": true,\r\n    \"images\": [\"https://example.com/images/coke1.jpg\"]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/products/add",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBa2FzaCIsImxhc3ROYW1lIjoiamF5YXN1cml5YSIsImVtYWlsIjoiQWthc2hAZ21haWwuY29tIiwicm9sZSI6InJlZ2lzdGVyZWQiLCJpYXQiOjE3NTU1MTQ4MzF9.6eWFXRftKUu0qtooz1dNWy2WI0CAabk1ctsmbSXFGb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/products/all",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJBa2FzaCIsImxhc3ROYW1lIjoiamF5YXN1cml5YSIsImVtYWlsIjoiQWthc2hAZ21haWwuY29tIiwicm9sZSI6InJlZ2lzdGVyZWQiLCJpYXQiOjE3NTU1MTQ4MzF9.6eWFXRftKUu0qtooz1dNWy2WI0CAabk1ctsmbSXFGb4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"name\": \"Coca Cola 2L\",\r\n    \"category\": \"Groceries\",\r\n    \"price\": 180,\r\n    \"brand\": \"Coca Cola\",\r\n    \"description\": \"Refreshing soft drink, 1 liter bottle.\",\r\n    \"availability\": false,\r\n    \"images\": [\"https://example.com/images/coke1.jpg\"]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/products/update/68a307c0741e027ae6d63cee",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"products",
+								"update",
+								"68a307c0741e027ae6d63cee"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "availability",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "low stock",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "chart",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
