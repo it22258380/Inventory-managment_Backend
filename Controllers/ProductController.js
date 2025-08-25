@@ -79,8 +79,8 @@ export async function getAvailability(req, res) {
 //low stock table
 export async function getLowStock(req, res) {
   try {
-    const threshold = 5;
-    const lowStockProducts = await Product.find({ quantity: { $lt: threshold } });
+    const min = 5;
+    const lowStockProducts = await Product.find({ quantity: { $lt: min } });
     res.status(200).json(lowStockProducts);
   } catch (err) {
     res.status(500).json({ message: "Error fetching low stock products", error: err });
